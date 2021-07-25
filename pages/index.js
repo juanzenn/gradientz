@@ -11,11 +11,11 @@ function GradientContainer(props) {
             background: props.bg,
           }}></figure>
       </header>
-      <main className='p-4'>
+      <main className='p-4 flex flex-col'>
         <h2 className='font-bold text-2xl tracking-tight mb-2 dark:text-gray-200'>
           {props.title}
         </h2>
-        <button className='text-lg font-light hover:text-primary-800 dark:text-gray-200 dark:hover:text-primary-500 transition-all'>
+        <button className='w-max text-lg font-light tracking-wide px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600/80 text-gray-900 dark:text-gray-100 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors'>
           Select
         </button>
       </main>
@@ -88,7 +88,7 @@ export default function Home() {
               out what others features are we planning on, go to our roadmap
             </p>
             <Link href='/'>
-              <a className='block px-6 py-2 border border-white rounded hover:bg-white hover:text-primary-800 font-bold transition-colors'>
+              <a className='block px-6 py-2 border border-white rounded hover:bg-white hover:text-primary-800 font-bold'>
                 Roadmap
               </a>
             </Link>

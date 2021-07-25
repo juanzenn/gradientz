@@ -1,4 +1,4 @@
-import 'tailwindcss/tailwind.css';
+import '../styles/styles.css';
 import ThemeProvider from '../components/ThemeProvider';
 
 function MyApp({ Component, pageProps }) {
