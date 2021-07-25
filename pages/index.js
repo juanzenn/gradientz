@@ -1,82 +1,125 @@
-import Head from 'next/head'
+import Head from 'next/head';
+import Link from 'next/link';
+
+function GradientContainer(props) {
+  return (
+    <article className='rounded-lg overflow-hidden shadow-lg bg-gray-50 dark:bg-gray-800'>
+      <header>
+        <figure
+          className={`w-full h-56`}
+          style={{
+            background: props.bg,
+          }}></figure>
+      </header>
+      <main className='p-4'>
+        <h2 className='font-bold text-2xl tracking-tight mb-2 dark:text-gray-200'>
+          {props.title}
+        </h2>
+        <button className='text-lg font-light hover:text-primary-800 dark:text-gray-200 dark:hover:text-primary-500 transition-all'>
+          Select
+        </button>
+      </main>
+    </article>
+  );
+}
 
 export default function Home() {
+  const gradients = [
+    {
+      title: 'Mango Fun',
+      bg: 'linear-gradient(180deg, #FF7E07 0%, #FF370C 100%)',
+    },
+    {
+      title: 'Lemon Lime',
+      bg: 'linear-gradient(180deg, #FFEC3E 0%, #3FCB6F 100%)',
+    },
+    {
+      title: 'Antartic',
+      bg: 'linear-gradient(180deg, #A4FAFF 0%, #227AAB 100%)',
+    },
+    {
+      title: 'Passion Fruit',
+      bg: 'linear-gradient(180deg, #F73D24 0%, #830202 100%)',
+    },
+    {
+      title: 'Purple Trouble',
+      bg: 'linear-gradient(180deg, #8D46A6 0%, #B80771 100%)',
+    },
+    {
+      title: 'Psychedelic Fiesta',
+      bg: 'linear-gradient(180deg, #00FFFF 0%, #827AFF 51.56%, #FA00FF 100%)',
+    },
+  ];
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
+    <>
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Gradientz</title>
+        <meta
+          name='description'
+          content='Beautiful gradients design and crafted for Tailwind and CSS. Come pick some!'
+        />
+        <link rel='icon' href='/favicon.ico' />
+        <link rel='preconnect' href='https://fonts.googleapis.com' />
+        <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+        <link
+          href='https://fonts.googleapis.com/css2?family=Rubik:wght@300;700&display=swap'
+          rel='stylesheet'
+        />
       </Head>
 
-      <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
-
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">
-            pages/index.js
-          </code>
-        </p>
-
-        <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and API.
+      <div className='dark:bg-gray-900 bg-white'>
+        <main className='container mx-auto px-4 lg:px-12'>
+          <header className='py-6'>
+            <h1 className='font-bold text-6xl text-gray-900 dark:text-gray-100 tracking-tight'>
+              Gradient<span className='text-primary-800'>z</span>
+            </h1>
+            <p className='font-light text-lg text-gray-600 dark:text-gray-200 tracking-normal'>
+              Beautiful gradients for Tailwind and CSS
             </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
+          </header>
+          <section className='py-4 bg-primary-800 text-white flex flex-col items-center  rounded-md space-y-4 shadow-lg'>
+            <p className='font-bold text-2xl tracking-tight'>
+              Welcome to our beta
             </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
+            <p className='font-light max-w-3xl text-center px-2'>
+              Gradientz is not only a gradient database. It aims to teach and
+              educate it's users on how to use gradients. If you want to check
+              out what others features are we planning on, go to our roadmap
             </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className="flex items-center justify-center w-full h-24 border-t">
-        <a
-          className="flex items-center justify-center"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="h-4 ml-2" />
-        </a>
-      </footer>
-    </div>
-  )
+            <Link href='/'>
+              <a className='block px-6 py-2 border border-white rounded hover:bg-white hover:text-primary-800 font-bold transition-colors'>
+                Roadmap
+              </a>
+            </Link>
+          </section>
+          <nav className='flex flex-col lg:flex-row lg:justify-between gap-4 my-12 py-2'>
+            <span className='w-full font-light text-gray-600 dark:text-gray-400'>
+              Choose a gradient - export it for Tailwind or CSS
+            </span>
+            <form className='w-full flex justify-end'>
+              <input
+                type='text'
+                name='search'
+                id='search'
+                placeholder='What color are you looking for?'
+                className='w-2/3 font-light text-gray-800 dark:bg-gray-700 dark:text-gray-200 px-4 py-2 rounded-l-md shadow-xl focus:outline-none focus:border focus:border-primary-800'
+              />
+              <button
+                type='submit'
+                className='font-bold px-4 py-2 bg-primary-800 text-white tracking-wide rounded-r-md shadow-xl hover:bg-primary-700 transition-all border border-primary-800'>
+                Search
+              </button>
+            </form>
+          </nav>
+          {/* Main section with the gradients */}
+          <section className='space-y-6 lg:space-y-0 lg:grid grid-cols-3 gap-6 pt-6 pb-24'>
+            {gradients.map(gradient => (
+              <GradientContainer title={gradient.title} bg={gradient.bg} />
+            ))}
+          </section>
+        </main>
+      </div>
+    </>
+  );
 }

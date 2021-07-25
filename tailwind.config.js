@@ -1,12 +1,22 @@
+const colors = require('tailwindcss/colors');
+
 module.exports = {
   mode: 'jit',
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'class',
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Rubik', 'sans-serif'],
+      },
+      colors: {
+        primary: colors.violet,
+        gray: colors.gray,
+      },
+    },
   },
   variants: {
     extend: {},
   },
   plugins: [],
-}
+};
