@@ -1,55 +1,93 @@
 import Head from 'next/head';
 import Link from 'next/link';
 
-function GradientContainer(props) {
-  return (
-    <article className='rounded-lg overflow-hidden shadow-lg bg-gray-50 dark:bg-gray-800'>
-      <header>
-        <figure
-          className={`w-full h-56`}
-          style={{
-            background: props.bg,
-          }}></figure>
-      </header>
-      <main className='p-4 flex flex-col'>
-        <h2 className='font-bold text-2xl tracking-tight mb-2 dark:text-gray-200'>
-          {props.title}
-        </h2>
-        <button className='w-max text-lg font-light tracking-wide px-4 py-2 rounded-md border border-gray-300 dark:border-gray-600/80 text-gray-900 dark:text-gray-100 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors'>
-          Select
-        </button>
-      </main>
-    </article>
-  );
-}
+import { useState } from 'react';
+
+import GradientContainer from '../components/GradientContainer';
+import GradientModal from '../components/GradientModal';
 
 export default function Home() {
   const gradients = [
     {
       title: 'Mango Fun',
-      bg: 'linear-gradient(180deg, #FF7E07 0%, #FF370C 100%)',
+      description:
+        'Go back to the bahamas and eat son mango, dance some bachata and relax.',
+      stops: ['#ff7e07', '#ff370c'],
+      deg: '180',
+      color: 'blue',
     },
     {
       title: 'Lemon Lime',
-      bg: 'linear-gradient(180deg, #FFEC3E 0%, #3FCB6F 100%)',
+      description: 'Fresh lemons for your cuba libre',
+      stops: ['#ffec3e', '#3fcb6f'],
+      deg: '180',
+      color: 'blue',
     },
     {
       title: 'Antartic',
-      bg: 'linear-gradient(180deg, #A4FAFF 0%, #227AAB 100%)',
+      description: 'Cold.',
+      stops: ['#a4faff', '#227aab'],
+      deg: '180',
+      color: 'blue',
     },
     {
       title: 'Passion Fruit',
-      bg: 'linear-gradient(180deg, #F73D24 0%, #830202 100%)',
+      description: 'Passion is color red like the passion fruit that is red?',
+      stops: ['#f73d24', '#830202'],
+      deg: '180',
+      color: 'red',
     },
     {
       title: 'Purple Trouble',
-      bg: 'linear-gradient(180deg, #8D46A6 0%, #B80771 100%)',
+      description:
+        'If you see this color, you are going to have some trouble...',
+      stops: ['#8d46a6', '#b80771'],
+      deg: '180',
+      color: 'red',
     },
     {
       title: 'Psychedelic Fiesta',
-      bg: 'linear-gradient(180deg, #00FFFF 0%, #827AFF 51.56%, #FA00FF 100%)',
+      description: "Don't do drugs, kis. Really.",
+      stops: ['#00ffff', '#827aff', '#fa00ff'],
+      deg: '180',
+      color: 'green',
     },
   ];
+
+  const [modal, setModal] = useState(false);
+  const [modalData, setModalData] = useState({});
+  const [relatedGradients, setRelatedGradients] = useState([]);
+
+  const selectRelated = (color, title) => {
+    const list = gradients.filter(gradient => {
+      if (color === gradient.color && title !== gradient.title) {
+        return true;
+      }
+      return null;
+    });
+    console.log(list);
+    setRelatedGradients(list);
+  };
+
+  const handleClearData = () => {
+    setModalData({});
+  };
+
+  const handleCloseModal = () => {
+    setModal(false);
+    document.body.style.overflow = 'auto';
+  };
+
+  const handleOpenModal = gradient => {
+    setModalData({
+      title: gradient.title,
+      description: gradient.description,
+      stops: gradient.stops,
+      deg: gradient.deg,
+    });
+    setModal(true);
+    document.body.style.overflow = 'hidden';
+  };
 
   return (
     <>
@@ -115,11 +153,27 @@ export default function Home() {
           {/* Main section with the gradients */}
           <section className='space-y-6 lg:space-y-0 lg:grid grid-cols-3 gap-6 pt-6 pb-24'>
             {gradients.map(gradient => (
-              <GradientContainer title={gradient.title} bg={gradient.bg} />
+              <GradientContainer
+                gradient={gradient}
+                openModal={handleOpenModal}
+                relatedGradients={selectRelated}
+              />
             ))}
           </section>
         </main>
       </div>
+
+      {modal ? (
+        <GradientModal
+          modal={modal}
+          closeModal={handleCloseModal}
+          gradient={modalData}
+          clearData={handleClearData}
+          relatedGradients={relatedGradients}
+          openModal={handleOpenModal}
+          selectRelatedGradients={selectRelated}
+        />
+      ) : null}
     </>
   );
 }
