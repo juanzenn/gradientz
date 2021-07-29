@@ -92,12 +92,27 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Gradientz</title>
-        <meta
-          name='description'
-          content='Beautiful gradients design and crafted for Tailwind and CSS. Come pick some!'
-        />
+
+<title>Gradientz | Gradients for web apps & websites</title>
+<meta name="title" content="Gradientz | Gradients for web apps & websites" />
+<meta name="description" content="Beautiful gradients designed and crafted to spark your website's look. Learn how to use them, where, and why you should care about gradients." />
+
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://gradientz.vercel.app/" />
+<meta property="og:title" content="Gradientz | Gradients for web apps & websites" />
+<meta property="og:description" content="Beautiful gradients designed and crafted to spark your website's look. Learn how to use them, where, and why you should care about gradients." />
+<meta property="og:image" content="/cover.png" />
+
+
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content="https://gradientz.vercel.app/" />
+<meta property="twitter:title" content="Gradientz | Gradients for web apps & websites" />
+<meta property="twitter:description" content="Beautiful gradients designed and crafted to spark your website's look. Learn how to use them, where, and why you should care about gradients." />
+<meta property="twitter:image" content="/cover.png" />
         <link rel='icon' href='/favicon.ico' />
+    
+
         <link rel='preconnect' href='https://fonts.googleapis.com' />
         <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
         <link
