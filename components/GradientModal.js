@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useSpring, animated as a, to } from 'react-spring';
+import CodeInstructions from './CodeInstructions';
 
 import { Cross } from 'akar-icons';
 
 export default function GradientModal(props) {
   const {
-    modal,
     closeModal,
     gradient,
     clearData,
@@ -25,7 +25,7 @@ export default function GradientModal(props) {
     setDegree(event.target.value);
   };
 
-  const gradiantString = `linear-gradient(${degree}deg, ${gradient.stops})`;
+  const gradientString = `linear-gradient(${degree}deg, ${gradient.stops})`;
 
   return (
     <section
@@ -36,9 +36,9 @@ export default function GradientModal(props) {
         style={{
           transform: o.to(o => `scale(${o})`),
         }}
-        className='relative w-full h-full lg:w-10/12 lg:h-5/6 h- mx-auto bg-white dark:bg-gray-900 lg:rounded-lg flex flex-col-reverse lg:flex-row overflow-hidden shadow-lg'>
+        className='overflow-x-hidden mx-auto relative w-full h-full lg:w-10/12 lg:h-5/6 bg-white dark:bg-gray-900 lg:rounded-lg flex flex-col-reverse lg:flex-row shadow-lg'>
         <button
-          className='absolute right-4 top-4'
+          className='absolute right-6 top-4'
           onClick={() => {
             setDegree(180);
             closeModal();
@@ -51,12 +51,13 @@ export default function GradientModal(props) {
             size={20}
           />
         </button>
+
         <section
-          className='w-full h-full'
+          className='w-full'
           style={{
-            background: gradiantString,
+            background: gradientString,
           }}></section>
-        <section className='w-full h-full p-4'>
+        <section className='w-full overflow-y-scroll p-4'>
           {/* Start of the section */}
           <header>
             <h2 className='font-bold text-2xl lg:text-4xl text-gray-900 dark:text-gray-100 tracking-tight mb-2'>
@@ -89,30 +90,7 @@ export default function GradientModal(props) {
             />
           </section>
 
-          <section className='hidden lg:block mb-4'>
-            <h3 className='font-bold text-sm tracking-wider mb-2 dark:text-gray-200'>
-              Pick your code -{' '}
-            </h3>
-            <article className='flex flex-col shadow-2xl'>
-              <div className='bg-gray-100 rounded-t-md overflow-hidden'>
-                <ul className='flex'>
-                  <li className='cursor-pointer w-full text-center p-4 hover:bg-gray-300'>
-                    CSS
-                  </li>
-                  <li className='cursor-pointer w-full text-center p-4 hover:bg-gray-300'>
-                    Tailwind
-                  </li>
-                </ul>
-              </div>
-
-              <div>
-                <p class='bg-gray-800 dark:bg-gray-600 text-white p-4 rounded-b-md'>
-                  background-image: {gradiantString}
-                </p>
-                <pre className='hidden'></pre>
-              </div>
-            </article>
-          </section>
+          <CodeInstructions css={gradientString} />
 
           <section>
             <h2 className='font-bold text-xl lg:text-2xl text-gray-900 dark:text-gray-100 tracking-tight mb-2'>
