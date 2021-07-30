@@ -1,58 +1,22 @@
 import Head from 'next/head';
 import Link from 'next/link';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import GradientContainer from '../components/GradientContainer';
 import GradientModal from '../components/GradientModal';
 
-export default function Home() {
-  const gradients = [
-    {
-      title: 'Mango Fun',
-      description:
-        'Go back to the bahamas and eat son mango, dance some bachata and relax.',
-      stops: ['#ff7e07', '#ff370c'],
-      deg: '180',
-      color: 'blue',
-    },
-    {
-      title: 'Lemon Lime',
-      description: 'Fresh lemons for your cuba libre',
-      stops: ['#ffec3e', '#3fcb6f'],
-      deg: '180',
-      color: 'blue',
-    },
-    {
-      title: 'Antartic',
-      description: 'Cold.',
-      stops: ['#a4faff', '#227aab'],
-      deg: '180',
-      color: 'blue',
-    },
-    {
-      title: 'Passion Fruit',
-      description: 'Passion is color red like the passion fruit that is red?',
-      stops: ['#f73d24', '#830202'],
-      deg: '180',
-      color: 'red',
-    },
-    {
-      title: 'Purple Trouble',
-      description:
-        'If you see this color, you are going to have some trouble...',
-      stops: ['#8d46a6', '#b80771'],
-      deg: '180',
-      color: 'red',
-    },
-    {
-      title: 'Psychedelic Fiesta',
-      description: "Don't do drugs, kis. Really.",
-      stops: ['#00ffff', '#827aff', '#fa00ff'],
-      deg: '180',
-      color: 'green',
-    },
-  ];
+import { fetchGradients } from '../lib/helpers';
+
+export async function getStaticProps(context) {
+  const gradientsData = await fetchGradients();
+
+  return {
+    props: { gradientsData },
+  };
+}
+export default function Home({ gradientsData }) {
+  const [gradients, setGradients] = useState(gradientsData);
 
   const [modal, setModal] = useState(false);
   const [modalData, setModalData] = useState({});
@@ -135,13 +99,13 @@ export default function Home() {
         />
       </Head>
 
-      <div className='dark:bg-gray-900 bg-white'>
+      <div className='dark:bg-gray-900 bg-white transition-colors duration-300'>
         <main className='container mx-auto px-4 lg:px-12'>
           <header className='py-6'>
-            <h1 className='font-bold text-6xl text-gray-900 dark:text-gray-100 tracking-tight'>
+            <h1 className='font-bold text-6xl text-gray-900 dark:text-gray-100 tracking-tight transition-colors duration-300'>
               Gradient<span className='text-primary-800'>z</span>
             </h1>
-            <p className='font-light text-lg text-gray-600 dark:text-gray-200 tracking-normal'>
+            <p className='font-light text-lg text-gray-600 dark:text-gray-200 tracking-normal transition-colors duration-300'>
               Beautiful gradients for Tailwind and CSS
             </p>
           </header>
@@ -161,16 +125,17 @@ export default function Home() {
             </Link>
           </section>
           <nav className='flex flex-col lg:flex-row lg:justify-between gap-4 my-12 py-2'>
-            <span className='w-full font-light text-gray-600 dark:text-gray-400'>
+            <span className='w-full font-light text-gray-600 dark:text-gray-400 transition-colors duration-300'>
               Choose a gradient - export it for Tailwind or CSS
             </span>
+
             <form className='w-full flex justify-end'>
               <input
                 type='text'
                 name='search'
                 id='search'
                 placeholder='What color are you looking for?'
-                className='w-2/3 font-light text-gray-800 dark:bg-gray-700 dark:text-gray-200 px-4 py-2 rounded-l-md shadow-xl focus:outline-none focus:border focus:border-primary-800'
+                className='w-2/3 font-light text-gray-800 dark:bg-gray-700 dark:text-gray-200 px-4 py-2 rounded-l-md shadow-xl focus:outline-none focus:border focus:border-primary-800 transition-colors duration-300'
               />
               <button
                 type='submit'
@@ -181,8 +146,9 @@ export default function Home() {
           </nav>
           {/* Main section with the gradients */}
           <section className='space-y-6 lg:space-y-0 lg:grid grid-cols-3 gap-6 pt-6 pb-24'>
-            {gradients.map(gradient => (
+            {gradients.map((gradient, index) => (
               <GradientContainer
+                key={`gradient-${index}`}
                 gradient={gradient}
                 openModal={handleOpenModal}
                 relatedGradients={selectRelated}

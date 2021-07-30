@@ -16,10 +16,10 @@ export default function CodeInstructions({ css }) {
   switch (selected) {
     case 'css':
       someNode = (
-        <p class='block max-h-72 text-lg overflow-y-scroll font-light tracking-wide rounded-b-md overflow-hidden py-4 px-4 text-gray-800'>
+        <p class='block max-h-72 text-lg overflow-y-scroll font-light tracking-wide rounded-b-md overflow-hidden py-4 px-4 text-gray-800 dark:text-gray-200 transition-colors duration-300'>
           Copy the next snippet on the CSS selector you want to apply the
           gradient:
-          <pre className='text-sm block max-w-xl overflow-x-scroll p-2 my-4 bg-gray-800 dark:bg-gray-600 text-white rounded-md shadow '>
+          <pre className='text-sm block max-w-xl overflow-x-scroll p-2 my-4 bg-gray-800 dark:bg-gray-600 text-white rounded-md shadow transition-colors duration-300 '>
             <code>background: {css}</code>
           </pre>
         </p>
@@ -27,20 +27,22 @@ export default function CodeInstructions({ css }) {
       break;
     case 'tailwind':
       someNode = (
-        <p class='block max-h-72 text-lg overflow-y-scroll font-light tracking-wide rounded-b-md overflow-hidden py-4 px-4 text-gray-800'>
+        <p class='block max-h-72 text-lg overflow-y-scroll font-light tracking-wide rounded-b-md overflow-hidden py-4 px-4 text-gray-800 dark:text-gray-200 transition-colors duration-300'>
           Open your{' '}
-          <span className='text-purple-800 font-mono'>tailwind.config.js</span>{' '}
+          <span className='text-purple-800 dark:text-purple-400 font-mono transition-colors duration-300'>
+            tailwind.config.js
+          </span>{' '}
           file and copy the next snippet:
           <pre className='text-sm block max-w-xl overflow-x-scroll p-2 my-4 bg-gray-800 dark:bg-gray-600 text-white rounded-md shadow '>
             <code className='class-json'>{tailwindConfig}</code>
           </pre>
           This will create a class{' '}
-          <span className='text-purple-800 font-mono'>
+          <span className='text-purple-800 dark:text-purple-400 font-mono transition-colors duration-300'>
             `bg-custom-gradient`
           </span>{' '}
           that you can apply on your elements. For more info, refer to{' '}
           <a
-            className='underline text-gray-800 hover:text-purple-800 transition-none'
+            className='underline text-gray-800 hover:text-purple-800 dark:text-gray-200 dark:hover:text-purple-400 transition-colors duration-300'
             href='https://tailwindcss.com/docs/background-image'>
             the Tailwind official docs.
           </a>

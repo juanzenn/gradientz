@@ -30,13 +30,13 @@ export default function GradientModal(props) {
   return (
     <section
       className={
-        'fixed top-0 w-screen h-screen bg-gray-900/50 dark:bg-gray-900/50  backdrop-filter backdrop-blur-sm grid items-center'
+        'fixed top-0 w-screen h-screen bg-gray-900/50 dark:bg-gray-900/50  backdrop-filter backdrop-blur-sm grid items-center transition-colors duration-300'
       }>
       <a.article
         style={{
           transform: o.to(o => `scale(${o})`),
         }}
-        className='overflow-x-hidden mx-auto relative w-full h-full lg:w-10/12 lg:h-5/6 bg-white dark:bg-gray-900 lg:rounded-lg flex flex-col-reverse lg:flex-row shadow-lg'>
+        className='overflow-x-hidden mx-auto relative w-full h-full lg:w-10/12 lg:h-5/6 bg-white dark:bg-gray-900 lg:rounded-lg flex flex-col-reverse lg:flex-row shadow-lg transition-colors duration-300'>
         <button
           className='absolute right-6 top-4'
           onClick={() => {
@@ -47,29 +47,29 @@ export default function GradientModal(props) {
             }, 100);
           }}>
           <Cross
-            className='dark:text-white hover:text-gray-800 dark:hover:text-gray-200'
+            className='dark:text-white hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-300'
             size={20}
           />
         </button>
 
         <section
-          className='w-full'
+          className='w-full h-full'
           style={{
             background: gradientString,
           }}></section>
         <section className='w-full overflow-y-scroll p-4'>
           {/* Start of the section */}
           <header>
-            <h2 className='font-bold text-2xl lg:text-4xl text-gray-900 dark:text-gray-100 tracking-tight mb-2'>
+            <h2 className='font-bold text-2xl lg:text-4xl text-gray-900 dark:text-gray-100 tracking-tight mb-2 transition-colors duration-300'>
               {gradient.title}
             </h2>
-            <p className='font-light text-lg text-gray-600 dark:text-gray-200 tracking-normal mb-4'>
+            <p className='font-light text-lg text-gray-600 dark:text-gray-200 tracking-normal mb-4 transition-colors duration-300'>
               {gradient.description}
             </p>
           </header>
           <section className='space-x-4 mb-6'>
-            <label className='font-bold text-xl tracking-tight text-gray-900 dark:text-gray-100'>
-              Angle -{' '}
+            <label className='font-bold text-xl tracking-tight text-gray-900 dark:text-gray-100 transition-colors duration-300'>
+              Angle
             </label>
             <input
               type='number'
@@ -77,7 +77,7 @@ export default function GradientModal(props) {
               min='0'
               max='360'
               name='angle-text'
-              className='font-light px-4 py-2 text-gray-800 dark:bg-gray-700 dark:text-gray-200 border border-gray-300 rounded-md focus:ring focus:outline-none'
+              className='font-light px-4 py-2 text-gray-800 dark:bg-gray-700 dark:text-gray-200 border border-gray-300 rounded-md focus:ring focus:outline-none transition-colors duration-300'
               onChange={handleDegreeChange}
             />
             <input
@@ -93,12 +93,12 @@ export default function GradientModal(props) {
           <CodeInstructions css={gradientString} />
 
           <section>
-            <h2 className='font-bold text-xl lg:text-2xl text-gray-900 dark:text-gray-100 tracking-tight mb-2'>
+            <h2 className='font-bold text-xl lg:text-2xl text-gray-900 dark:text-gray-100 tracking-tight mb-2 transition-colors duration-300'>
               Related
             </h2>
             <div className='grid grid-cols-3 justify-items-center gap-4'>
               {relatedGradients.length <= 0 ? (
-                <p className='font-light text-lg text-gray-600 dark:text-gray-200 tracking-normal mb-4'>
+                <p className='font-light text-lg text-gray-600 dark:text-gray-200 tracking-normal mb-4 transition-colors duration-300'>
                   No related gradients
                 </p>
               ) : (
