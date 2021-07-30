@@ -1,15 +1,22 @@
+import path from 'path';
+import { promises as fs } from 'fs';
+
 import Head from 'next/head';
 import Link from 'next/link';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import GradientContainer from '../components/GradientContainer';
 import GradientModal from '../components/GradientModal';
 
-import { fetchGradients } from '../lib/helpers';
+import SearchBar from '../components/SearchBar';
 
 export async function getStaticProps(context) {
-  const gradientsData = await fetchGradients();
+  const publicDir = path.join(process.cwd(), 'public');
+  const filePath = path.join(publicDir, 'gradients.json');
+
+  const gradients = await fs.readFile(filePath, 'utf8');
+  const gradientsData = JSON.parse(gradients);
 
   return {
     props: { gradientsData },
@@ -21,7 +28,8 @@ export default function Home({ gradientsData }) {
   const [modal, setModal] = useState(false);
   const [modalData, setModalData] = useState({});
   const [relatedGradients, setRelatedGradients] = useState([]);
-
+  const [searchInput, setSearchInput] = useState('');
+  // rawr
   const selectRelated = (color, title) => {
     const list = gradients.filter(gradient => {
       if (color === gradient.color && title !== gradient.title) {
@@ -29,7 +37,6 @@ export default function Home({ gradientsData }) {
       }
       return null;
     });
-    console.log(list);
     setRelatedGradients(list);
   };
 
@@ -51,6 +58,26 @@ export default function Home({ gradientsData }) {
     });
     setModal(true);
     document.body.style.overflow = 'hidden';
+  };
+
+  const handleInputSearch = event => {
+    setSearchInput(event.target.value);
+  };
+
+  const handleSearch = event => {
+    event.preventDefault();
+    const filterValue = searchInput.toLowerCase();
+    if (filterValue === '') {
+      setGradients(gradientsData);
+      return;
+    }
+    const filteredArray = gradientsData.filter(gradient => {
+      if (filterValue === gradient.color) {
+        return true;
+      }
+      return null;
+    });
+    setGradients(filteredArray);
   };
 
   return (
@@ -129,32 +156,31 @@ export default function Home({ gradientsData }) {
               Choose a gradient - export it for Tailwind or CSS
             </span>
 
-            <form className='w-full flex justify-end'>
-              <input
-                type='text'
-                name='search'
-                id='search'
-                placeholder='What color are you looking for?'
-                className='w-2/3 font-light text-gray-800 dark:bg-gray-700 dark:text-gray-200 px-4 py-2 rounded-l-md shadow-xl focus:outline-none focus:border focus:border-primary-800 transition-colors duration-300'
-              />
-              <button
-                type='submit'
-                className='font-bold px-4 py-2 bg-primary-800 text-white tracking-wide rounded-r-md shadow-xl hover:bg-primary-700 transition-all border border-primary-800'>
-                Search
-              </button>
-            </form>
+            <SearchBar
+              handleChange={handleInputSearch}
+              handleSubmit={handleSearch}
+            />
           </nav>
           {/* Main section with the gradients */}
-          <section className='space-y-6 lg:space-y-0 lg:grid grid-cols-3 gap-6 pt-6 pb-24'>
-            {gradients.map((gradient, index) => (
-              <GradientContainer
-                key={`gradient-${index}`}
-                gradient={gradient}
-                openModal={handleOpenModal}
-                relatedGradients={selectRelated}
-              />
-            ))}
-          </section>
+
+          {gradients.length === 0 ? (
+            <div
+              style={{ minHeight: '50vh' }}
+              className='w-full text-3xl font-light text-gray-800 dark:text-gray-200 transition-colors duration-300'>
+              Theres is no gradients with that color...
+            </div>
+          ) : (
+            <section className='space-y-6 lg:space-y-0 lg:grid grid-cols-3 gap-6 pt-6 pb-24'>
+              {gradients.map((gradient, index) => (
+                <GradientContainer
+                  key={`gradient-${index}`}
+                  gradient={gradient}
+                  openModal={handleOpenModal}
+                  relatedGradients={selectRelated}
+                />
+              ))}
+            </section>
+          )}
         </main>
       </div>
 
