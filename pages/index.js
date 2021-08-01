@@ -9,7 +9,7 @@ import { useState } from 'react';
 import GradientContainer from '../components/GradientContainer';
 import GradientModal from '../components/GradientModal';
 
-import SearchBar from '../components/SearchBar';
+import SecondaryNavigation from '../components/SecondaryNavigation/SecondaryNavigation';
 
 export async function getStaticProps(context) {
   const publicDir = path.join(process.cwd(), 'public');
@@ -28,16 +28,19 @@ export default function Home({ gradientsData }) {
   const [modal, setModal] = useState(false);
   const [modalData, setModalData] = useState({});
   const [relatedGradients, setRelatedGradients] = useState([]);
-  const [searchInput, setSearchInput] = useState('');
-  // rawr
+
   const selectRelated = (color, title) => {
-    const list = gradients.filter(gradient => {
-      if (color === gradient.color && title !== gradient.title) {
-        return true;
-      }
-      return null;
+    const relatedList = [];
+
+    color.forEach(color => {
+      gradients.map(gradient => {
+        if (gradient.title !== title && gradient.color.indexOf(color) >= 0) {
+          relatedList.push(gradient);
+        }
+      });
     });
-    setRelatedGradients(list);
+
+    setRelatedGradients(relatedList);
   };
 
   const handleClearData = () => {
@@ -58,26 +61,6 @@ export default function Home({ gradientsData }) {
     });
     setModal(true);
     document.body.style.overflow = 'hidden';
-  };
-
-  const handleInputSearch = event => {
-    setSearchInput(event.target.value);
-  };
-
-  const handleSearch = event => {
-    event.preventDefault();
-    const filterValue = searchInput.toLowerCase();
-    if (filterValue === '') {
-      setGradients(gradientsData);
-      return;
-    }
-    const filteredArray = gradientsData.filter(gradient => {
-      if (filterValue === gradient.color) {
-        return true;
-      }
-      return null;
-    });
-    setGradients(filteredArray);
   };
 
   return (
@@ -151,18 +134,13 @@ export default function Home({ gradientsData }) {
               </a>
             </Link>
           </section>
-          <nav className='flex flex-col lg:flex-row lg:justify-between gap-4 my-12 py-2'>
-            <span className='w-full font-light text-gray-600 dark:text-gray-400 transition-colors duration-300'>
-              Choose a gradient - export it for Tailwind or CSS
-            </span>
 
-            <SearchBar
-              handleChange={handleInputSearch}
-              handleSubmit={handleSearch}
-            />
-          </nav>
+          <SecondaryNavigation
+            setGradients={setGradients}
+            gradients={gradientsData}
+          />
+
           {/* Main section with the gradients */}
-
           {gradients.length === 0 ? (
             <div
               style={{ minHeight: '50vh' }}

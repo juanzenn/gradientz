@@ -4,41 +4,41 @@
     "description": "Go back to the bahamas and eat son mango, dance some bachata and relax.",
     "stops": ["#ff7e07", "#ff370c"],
     "deg": "180",
-    "color": "red"
+    "color": ["orange"]
   },
   {
     "title": "Lemon Lime",
     "description": "Fresh lemons for your cuba libre",
     "stops": ["#ffec3e", "#3fcb6f"],
     "deg": "180",
-    "color": "green"
+    "color": ["green", "yellow"]
   },
   {
     "title": "Antartic",
     "description": "Cold.",
     "stops": ["#a4faff", "#227aab"],
     "deg": "180",
-    "color": "blue"
+    "color": ["blue"]
   },
   {
     "title": "Passion Fruit",
     "description": "Passion is color red like the passion fruit that is red?",
     "stops": ["#f73d24", "#830202"],
     "deg": "180",
-    "color": "red"
+    "color": ["red"]
   },
   {
     "title": "Purple Trouble",
     "description": "If you see this color, you are going to have some trouble...",
     "stops": ["#8d46a6", "#b80771"],
     "deg": "180",
-    "color": "purple"
+    "color": ["purple"]
   },
   {
     "title": "Psychedelic Fiesta",
     "description": "Don't do drugs, kids. Really.",
     "stops": ["#00ffff", "#827aff", "#fa00ff"],
     "deg": "180",
-    "color": "pink"
+    "color": ["pink", "blue"]
   }
 ]
